@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option go_package="go/service";
+import "google/api/annotations.proto";
+
+package gateway;
+
+service AliveService {
+  rpc GetStatus(AliveRequest) returns (AliveResponse) {
+    option (google.api.http) = {
+      post: "/alive"
+      body: "*"
+    };
+  }
+}
+
+message AliveRequest {
+  TestEnum te = 1;
+}
+
+message AliveResponse {
+  bool status =  1;
+}
+
+enum TestEnum{
+  UNKOWN = 0;
+  ONE = 1;
+  TWO = 2;
+}

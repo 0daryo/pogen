@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option go_package="go/service";
+import "google/api/annotations.proto";
+
+package gateway;
+
+service UserService {
+  rpc GetStatus(UserRequest) returns (UserResponse) {
+    option (google.api.http) = {
+      get: "/users/{userId}"
+      body: "*"
+    };
+  }
+}
+
+message UserRequest {
+}
+
+message UserResponse {
+  bool status =  1;
+}
