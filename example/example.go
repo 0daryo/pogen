@@ -7,8 +7,10 @@ import (
 
 // nolint
 var pathToRegexp = map[string]*regexp.Regexp{
-	"/alive":          regexp.MustCompile("^/alive$"),
-	"/users/{userId}": regexp.MustCompile("^/users/[a-zA-Z0-9]*$"),
+	"/alive":                             regexp.MustCompile("^/alive$"),
+	"/users/{userId}":                    regexp.MustCompile("^/users/[-a-zA-Z0-9_]*$"),
+	"/users/{userId}/nesteds":            regexp.MustCompile("^/users/[-a-zA-Z0-9_]*/nesteds$"),
+	"/users/{userId}/nesteds/{nestedId}": regexp.MustCompile("^/users/[-a-zA-Z0-9_]*/nesteds/[-a-zA-Z0-9_]*$"),
 }
 
 func Pattern(path string) (pattern string, found bool) {

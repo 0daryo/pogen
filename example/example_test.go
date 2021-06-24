@@ -14,15 +14,7 @@ func TestPattern(t *testing.T) {
 		wantFound   bool
 	}{
 		{
-			name: "users/userId",
-			args: args{
-				path: "/users/hogefuga",
-			},
-			wantPattern: "/users/{userId}",
-			wantFound:   true,
-		},
-		{
-			name: "alive",
+			name: "/alive",
 			args: args{
 				path: "/alive",
 			},
@@ -30,9 +22,33 @@ func TestPattern(t *testing.T) {
 			wantFound:   true,
 		},
 		{
-			name: "users/userId/no-user",
+			name: "/users/{userId}",
 			args: args{
-				path: "users/userId/no-user",
+				path: "/users/aA1_-",
+			},
+			wantPattern: "/users/{userId}",
+			wantFound:   true,
+		},
+		{
+			name: "/users/{userId}/nesteds",
+			args: args{
+				path: "/users/aA1_-/nesteds",
+			},
+			wantPattern: "/users/{userId}/nesteds",
+			wantFound:   true,
+		},
+		{
+			name: "/users/{userId}/nesteds/{nestedId}",
+			args: args{
+				path: "/users/aA1_-/nesteds/aA1_-",
+			},
+			wantPattern: "/users/{userId}/nesteds/{nestedId}",
+			wantFound:   true,
+		},
+		{
+			name: "nopass",
+			args: args{
+				path: "nopassnopass",
 			},
 			wantPattern: "",
 			wantFound:   false,

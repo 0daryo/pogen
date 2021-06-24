@@ -6,9 +6,21 @@ import "google/api/annotations.proto";
 package gateway;
 
 service UserService {
-  rpc GetStatus(UserRequest) returns (UserResponse) {
+  rpc GetUser(UserRequest) returns (UserResponse) {
     option (google.api.http) = {
       get: "/users/{userId}"
+      body: "*"
+    };
+  }
+  rpc GetNestedUser(UserRequest) returns (UserResponse) {
+    option (google.api.http) = {
+      get: "/users/{userId}/nesteds"
+      body: "*"
+    };
+  }
+  rpc GetNestedNestedUser(UserRequest) returns (UserResponse) {
+    option (google.api.http) = {
+      get: "/users/{userId}/nesteds/{nestedId}"
       body: "*"
     };
   }
